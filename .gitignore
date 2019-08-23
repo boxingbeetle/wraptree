@@ -1,5 +1,6 @@
 .vs/
 Debug/
 Release/
+WrapTree.exe
 WrapTree.vcxproj.*
 *.pid
