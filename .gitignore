@@ -1,0 +1,5 @@
+.vs/
+Debug/
+Release/
+WrapTree.vcxproj.*
+*.pid
