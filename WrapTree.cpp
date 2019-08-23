@@ -36,7 +36,7 @@ static void PrintErrorMessage(LPCTSTR lpMessage)
 
 static HANDLE PrepareStandardHandle(DWORD dwHandleType)
 {
-  LPTSTR lpTypeText;
+  LPCTSTR lpTypeText;
   switch (dwHandleType)
   {
   case STD_INPUT_HANDLE:
