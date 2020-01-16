@@ -22,8 +22,8 @@ Write-Host "Testing target application $wraptree"
 
 $result = Test-Path -Path $wraptree
 if (-not $result) {
-	Write-Host "Target application doesn't exist"
-	exit 1
+    Write-Host "Target application doesn't exist"
+    exit 1
 }
 
 $disp = "dispatcher.ps1"
@@ -33,27 +33,27 @@ $ok = $true
 $total++
 $ret = TestCase1($wraptree)
 if ($ret) {
-	$success++
+    $success++
 } else {
-	$ok = $false
+    $ok = $false
 }
 
 # test case 2: NOT using 'wraptree'
 $total++
 $ret = TestCase2
 if ($ret) {
-	$success++
+    $success++
 } else {
-	$ok = $false
+    $ok = $false
 }
 
 # test case 3: using 'wraptree' and killing launcher before the dispatcher
 $total++
 $ret = TestCase3($wraptree)
 if ($ret) {
-	$success++
+    $success++
 } else {
-	$ok = $false
+    $ok = $false
 }
 
 # The SoftFab wrapper executing this script will take the last line written 
@@ -62,6 +62,6 @@ Write-Host
 Write-Host "$success/$total test cases succeed"
 
 if ($ok) {
-	exit 0
+    exit 0
 }
 exit 1
