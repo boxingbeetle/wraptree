@@ -10,6 +10,7 @@ function TestCase2 {
     Write-Host "GIVEN the process sequence 'Dispatcher, Launcher, Notepad' is started"
     Write-Host "WHEN the Dispatcher is killed"
     Write-Host "THEN the Launcher and Notepad are still running"
+    Write-Host "---"
 
     # Start dispatcher (wraptree NOT used)
     Write-Host "Starting $disp"
@@ -47,8 +48,13 @@ function TestCase2 {
 
     $alive = Expect-Alive -AppPid $note_pid -Application "Notepad" -Cleanup $true
     if (-Not $alive) {
-        $ok = $false;
+        $ok = $false
     }
+
+    # Clean up
+    Remove-Item "dispatcher.pid"
+    Remove-Item "launcher.pid"
+    Remove-Item "notepad.pid"
 
     Write-Host "Test case 2: return $ok"
     return $ok

@@ -16,6 +16,7 @@ function TestCase3 {
     Write-Host "AND Notepad is still running"
     Write-Host "WHEN the Dispatcher is killed"
     Write-Host "THEN Notepad is terminated"
+    Write-Host "---"
 
     # Start dispatcher
     Write-Host "Starting $disp"
@@ -46,13 +47,13 @@ function TestCase3 {
     # Verify that the dispatcher is still alive and keep it alive
     $alive = Expect-Alive -AppPid $disp_pid -Application "Dispatcher" -Cleanup $false
     if (-Not $alive) {
-        $ok = $false;
+        $ok = $false
     }
 
     # Verify that notepad is still alive and keep it alive
     $alive = Expect-Alive -AppPid $note_pid -Application "Notepad" -Cleanup $false
     if (-Not $alive) {
-        $ok = $false;
+        $ok = $false
     }
 
     # Kill dispatcher
@@ -72,8 +73,13 @@ function TestCase3 {
     
     $dead = Expect-Dead -AppPid $note_pid -Application "Notepad"
     if (-Not $dead) {
-        $ok = $false;
+        $ok = $false
     }
+
+    # Clean up
+    Remove-Item "dispatcher.pid"
+    Remove-Item "launcher.pid"
+    Remove-Item "notepad.pid"
 
     Write-Host "Test case 3: return $ok"
     return $ok

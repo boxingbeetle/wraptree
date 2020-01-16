@@ -12,6 +12,7 @@ function TestCase1 {
     Write-Host "GIVEN the process sequence 'WrapTree, Dispatcher, Launcher, Notepad' is started"
     Write-Host "WHEN the Dispatcher is killed"
     Write-Host "THEN the Launcher and Notepad are terminated"
+    Write-Host "---"
 
     # Start dispatcher
     Write-Host "Starting $disp"
@@ -44,12 +45,17 @@ function TestCase1 {
     
     $dead = Expect-Dead -AppPid $laun_pid -Application "Launcher"
     if (-Not $dead) {
-        $ok = $false;
+        $ok = $false
     }
     $dead = Expect-Dead -AppPid $note_pid -Application "Notepad"
     if (-Not $dead) {
-        $ok = $false;
+        $ok = $false
     }
+
+    # Clean up
+    Remove-Item "dispatcher.pid"
+    Remove-Item "launcher.pid"
+    Remove-Item "notepad.pid"
 
     Write-Host "Test case 1: return $ok"
     return $ok
